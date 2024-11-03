@@ -5,27 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 ¡Feliz Cumpleaños! 🎉</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Cargar EmailJS -->
 </head>
 <body>
 
-    <audio id="birthday-sound" src="song.mp3"></audio> <!-- Asegúrate de tener el archivo de sonido -->
+    <audio id="birthday-sound" src="song.mp3"></audio> <!-- Archivo de sonido -->
 
     <div class="container">
         <h1>🎉 ¡Feliz Cumpleaños! 🎉</h1>
         <p>¡Espero que tengas un día increíble lleno de alegría, sorpresas y mucho amor!</p>
         <p class="confetti">🎊🎈🎂🎈🎊</p>
 
-        <!-- Botón para pedir un deseo -->
         <button id="wish-button">Pide un deseo 🎁</button>
         
-        <!-- Cuadro de texto y botón de envío ocultos por defecto -->
         <div id="wish-input-container" style="display: none;">
             <textarea id="wish-input" placeholder="Escribe tu deseo aquí..." rows="4" cols="50"></textarea>
             <br>
             <button onclick="submitWish()">Enviar deseo</button>
         </div>
 
-        <!-- Mensaje que aparecerá después de enviar el deseo -->
         <div id="wish-message" style="display: none;">
             <p>¡Que todos tus deseos se hagan realidad! 🎂</p>
         </div>
@@ -45,21 +43,33 @@
     </div>
 
     <script>
-        // Función para mostrar el cuadro de texto y reproducir el sonido al hacer clic en el botón "Pide un deseo"
+        // Inicializa EmailJS
+        (function() {
+            emailjs.init("user_u9CSehEQB5bqBcXizBr5I"); // Reemplaza con tu User ID
+        })();
+
         document.getElementById("wish-button").onclick = function() {
-            // Reproduce el sonido
-            document.getElementById("birthday-sound").play();
-            // Muestra el cuadro de texto
-            document.getElementById("wish-input-container").style.display = "block";
+            const sound = document.getElementById("birthday-sound");
+            sound.play(); // Reproduce el sonido
+            document.getElementById("wish-input-container").style.display = "block"; // Muestra el cuadro de texto
             this.style.display = "none"; // Oculta el botón después de hacer clic
         };
 
-        // Función para enviar el deseo
         function submitWish() {
             const wish = document.getElementById("wish-input").value;
             if (wish) {
-                document.getElementById("wish-message").style.display = "block"; // Muestra el mensaje
-                document.getElementById("wish-input-container").style.display = "none"; // Oculta el cuadro de texto
+                // Envía el deseo a tu correo
+                emailjs.send("service_qbjao75", "template_kn2pfif", {
+                    wish: wish
+                })
+                .then(function(response) {
+                    console.log("Éxito", response.status, response.text);
+                    document.getElementById("wish-message").style.display = "block"; // Muestra el mensaje
+                    document.getElementById("wish-input-container").style.display = "none"; // Oculta el cuadro de texto
+                }, function(error) {
+                    console.log("Error", error);
+                    alert("Hubo un problema al enviar tu deseo, por favor intenta de nuevo.");
+                });
             } else {
                 alert("Por favor, escribe un deseo antes de enviarlo.");
             }
