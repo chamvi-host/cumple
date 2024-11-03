@@ -4,24 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 ¡Feliz Cumpleaños! 🎉</title>
-    <!-- Enlace al archivo CSS externo -->
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-     <audio id="birthday-sound" src="song.mp3" autoplay></audio>
+    <!-- Sonido que se reproducirá al cargar la página -->
+    <audio id="birthday-sound" src="tu-sonido.mp3" autoplay></audio>
 
- <div class="container">
+    <div class="container">
         <h1>🎉 ¡Feliz Cumpleaños! 🎉</h1>
         <p>¡Espero que tengas un día increíble lleno de alegría, sorpresas y mucho amor!</p>
         <p class="confetti">🎊🎈🎂🎈🎊</p>
 
-        <!-- Cuadro de texto para que el cumpleañero escriba su deseo -->
-        <textarea id="wish-input" placeholder="Escribe tu deseo aquí..." rows="4" cols="50"></textarea>
-        <br>
-        
         <!-- Botón para pedir un deseo -->
-        <button onclick="submitWish()">Pide un deseo 🎁</button>
+        <button onclick="document.getElementById('birthday-sound').play()">¡Escuchar el cumpleaños! 🎶</button>
+        <button id="wish-button">Pide un deseo 🎁</button>
+        
+        <!-- Cuadro de texto y botón de envío ocultos por defecto -->
+        <div id="wish-input-container" style="display: none;">
+            <textarea id="wish-input" placeholder="Escribe tu deseo aquí..." rows="4" cols="50"></textarea>
+            <br>
+            <button onclick="submitWish()">Enviar deseo</button>
+        </div>
+
+        <!-- Mensaje que aparecerá después de enviar el deseo -->
+        <div id="wish-message" style="display: none;">
+            <p>¡Que todos tus deseos se hagan realidad! 🎂</p>
+        </div>
     </div>
 
     <div class="confetti-bg">
@@ -38,14 +47,20 @@
     </div>
 
     <script>
+        // Función para mostrar el cuadro de texto al hacer clic en el botón "Pide un deseo"
+        document.getElementById("wish-button").onclick = function() {
+            document.getElementById("wish-input-container").style.display = "block";
+            this.style.display = "none"; // Oculta el botón después de hacer clic
+        };
+
+        // Función para enviar el deseo
         function submitWish() {
-            // Obtener el valor del cuadro de texto
             const wish = document.getElementById("wish-input").value;
-            // Mostrar el deseo en un mensaje de alerta
             if (wish) {
-                alert("Tu deseo es: " + wish);
+                document.getElementById("wish-message").style.display = "block"; // Muestra el mensaje
+                document.getElementById("wish-input-container").style.display = "none"; // Oculta el cuadro de texto
             } else {
-                alert("Por favor, escribe un deseo antes de pedirlo.");
+                alert("Por favor, escribe un deseo antes de enviarlo.");
             }
         }
     </script>
