@@ -8,8 +8,7 @@
 </head>
 <body>
 
-    <!-- Sonido que se reproducirá al cargar la página -->
-    <audio id="birthday-sound" src="song.mp3" autoplay></audio>
+    <audio id="birthday-sound" src="song.mp3"></audio> <!-- Asegúrate de tener el archivo de sonido -->
 
     <div class="container">
         <h1>🎉 ¡Feliz Cumpleaños! 🎉</h1>
@@ -17,7 +16,6 @@
         <p class="confetti">🎊🎈🎂🎈🎊</p>
 
         <!-- Botón para pedir un deseo -->
-        <button onclick="document.getElementById('birthday-sound').play()">¡Escuchar el cumpleaños! 🎶</button>
         <button id="wish-button">Pide un deseo 🎁</button>
         
         <!-- Cuadro de texto y botón de envío ocultos por defecto -->
@@ -47,8 +45,11 @@
     </div>
 
     <script>
-        // Función para mostrar el cuadro de texto al hacer clic en el botón "Pide un deseo"
+        // Función para mostrar el cuadro de texto y reproducir el sonido al hacer clic en el botón "Pide un deseo"
         document.getElementById("wish-button").onclick = function() {
+            // Reproduce el sonido
+            document.getElementById("birthday-sound").play();
+            // Muestra el cuadro de texto
             document.getElementById("wish-input-container").style.display = "block";
             this.style.display = "none"; // Oculta el botón después de hacer clic
         };
