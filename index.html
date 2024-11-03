@@ -11,15 +11,19 @@
 
      <audio id="birthday-sound" src="song.mp3" autoplay></audio>
 
-   <div class="container">
-    <h1>🎉 ¡Feliz Cumpleaños RI! 🎉</h1>
-    <p>¡Espero que tengas un día increíble lleno de alegría, sorpresas y mucho amor!</p>
-    <p class="confetti">🎊🎈🎂🎈🎊</p>
-    <button onclick="document.getElementById('birthday-sound').play()">¡Escuchar el cumpleaños! 🎶</button>
-    <button onclick="alert('¡Que todos tus deseos se hagan realidad! 🎂')">Pide un deseo 🎁</button>
-</div>
+ <div class="container">
+        <h1>🎉 ¡Feliz Cumpleaños! 🎉</h1>
+        <p>¡Espero que tengas un día increíble lleno de alegría, sorpresas y mucho amor!</p>
+        <p class="confetti">🎊🎈🎂🎈🎊</p>
 
-    <!-- Fondo animado con confeti -->
+        <!-- Cuadro de texto para que el cumpleañero escriba su deseo -->
+        <textarea id="wish-input" placeholder="Escribe tu deseo aquí..." rows="4" cols="50"></textarea>
+        <br>
+        
+        <!-- Botón para pedir un deseo -->
+        <button onclick="submitWish()">Pide un deseo 🎁</button>
+    </div>
+
     <div class="confetti-bg">
         <div class="confetti-piece"></div>
         <div class="confetti-piece"></div>
@@ -32,6 +36,19 @@
         <div class="confetti-piece"></div>
         <div class="confetti-piece"></div>
     </div>
+
+    <script>
+        function submitWish() {
+            // Obtener el valor del cuadro de texto
+            const wish = document.getElementById("wish-input").value;
+            // Mostrar el deseo en un mensaje de alerta
+            if (wish) {
+                alert("Tu deseo es: " + wish);
+            } else {
+                alert("Por favor, escribe un deseo antes de pedirlo.");
+            }
+        }
+    </script>
 
 </body>
 </html>
