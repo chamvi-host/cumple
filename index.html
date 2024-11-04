@@ -12,7 +12,7 @@
     <audio id="birthday-sound" src="song.mp3"></audio> <!-- Archivo de sonido -->
 
     <div class="container">
-        <h1>🎉 ¡Feliz Cumpleaños JOEL! 🎉</h1>
+        <h1>🎉 ¡Feliz Cumpleaño! 🎉</h1>
         <p>¡Espero que tengas un día increíble lleno de alegría, sorpresas y mucho amor!</p>
         <p class="confetti">🎊🎈🎂🎈🎊</p>
 
@@ -49,12 +49,20 @@
         })();
 
         // Maneja el clic en el botón de "Pide un deseo"
-        document.getElementById("wish-button").onclick = function() {
+        document.getElementById("wish-button").addEventListener("click", function() {
             const sound = document.getElementById("birthday-sound");
-            sound.play(); // Reproduce el sonido
-            document.getElementById("wish-input-container").style.display = "block"; // Muestra el cuadro de texto
+
+            // Intenta reproducir el sonido
+            sound.play().then(() => {
+                console.log("Sonido reproducido correctamente");
+            }).catch(error => {
+                console.log("Error al intentar reproducir el sonido:", error);
+            });
+
+            // Muestra el cuadro de texto para el deseo y oculta el botón
+            document.getElementById("wish-input-container").style.display = "block";
             this.style.display = "none"; // Oculta el botón después de hacer clic
-        };
+        });
 
         // Función para enviar el deseo por EmailJS
         function submitWish() {
