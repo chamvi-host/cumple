@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 ¡Feliz Cumpleaños! 🎉</title>
+    <title>🎉 ¡Feliz Cumpleaños AWS! 🎉</title>
     <link rel="stylesheet" href="estilos.css">
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script> <!-- Cargar EmailJS -->
 </head>
@@ -43,9 +43,9 @@
     </div>
 
     <script>
-        // Inicializa EmailJS
+        // Inicializa EmailJS con tu Public Key (User ID)
         (function() {
-            emailjs.init("V7xUqqo60dOwUEkwx"); // Reemplaza con tu User ID
+            emailjs.init("V7xUqqo60dOwUEkwx"); // Tu Public Key
         })();
 
         document.getElementById("wish-button").onclick = function() {
@@ -60,7 +60,7 @@
             if (wish) {
                 // Envía el deseo a tu correo
                 emailjs.send("service_qbjao75", "template_dfqvcg4", {
-                    wish: wish
+                    wish: wish // Asegúrate de que "wish" coincide con el campo en tu template
                 })
                 .then(function(response) {
                     console.log("Éxito", response.status, response.text);
